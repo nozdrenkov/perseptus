@@ -1,0 +1,169 @@
+﻿html {
+    background-color: #fff;
+}
+
+#body {
+    background-color: #fff;/*#E0C6AF;*/
+}
+
+footer {
+    background-color: #fff;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+img {
+	border: none
+}
+
+hr.dixy-hr {
+    border: none;
+    color: #E67817;
+    background-color: #E67817;
+    height: 4px;
+}
+
+input, textarea {
+    background: none repeat scroll 0 0 #fff;
+    /*border: none;*/
+}
+input.hasDatepicker
+{
+	border: 1px solid #c2c2c2;
+	width: 150px;
+}
+
+input[type="submit"], input[type="button"], button {
+	font-size: 1em;
+}
+
+input[type="file"]
+{
+	border: none;
+}
+.fileSelector
+{
+	width: 300px;
+}
+
+mark{
+	background-color: #E67817;
+}
+
+label
+{
+	display:inline;
+}
+
+.dixy-color {
+	color: #E67817;
+}
+
+#login .username{
+	font-weight: bold;
+}
+
+.featured + .main-content{
+	background: url("../Images/heroAccent-dixy.png") no-repeat;
+}
+
+.featured .content-wrapper {
+    background-color: #E67817;
+    background-image: -ms-linear-gradient(left, #E67817 0%, #E67817 100%);
+    background-image: -o-linear-gradient(left, #E67817 0%, #E67817 100%);
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #E67817), color-stop(1, #E67817));
+    background-image: -webkit-linear-gradient(left, #E67817 0%, #E67817 100%);
+    background-image: linear-gradient(left, #E67817 0%, #E67817 100%);
+    color: white;
+}
+
+input[type="submit"], input[type="button"], button {
+    background-color: #E67817;
+    border: none;
+    color: #fff;
+}
+input[type="radio"] 
+{
+	width:auto;
+}
+
+.photoUploadResult p {
+	font-size: 1.5em;
+}
+
+.zoneName {
+	font-size:1.25em;
+	font-weight: bold;
+}
+a.menuItemLink {
+	font-size: 1.25em;
+}
+
+.btnSearch
+{
+	min-width:80px;
+	margin-top: 10px;
+}
+
+.photoResultItem
+{
+	float:left;
+	margin: 0px 10px 10px 0px;
+	padding: 3px;
+	min-width: 250px;
+	/*border: 1px solid gray;*/
+}
+.photoResultImage
+{
+	display: block;
+	height: 165px;/*200px;*/
+	/*max-width: 200px;*/
+}
+.pageNumberCurrent
+{
+	font-weight:bold;
+}
+
+.field-validation-error
+{
+	display:none;
+}
+
+.dragHolder { font-size: 1.1em; }
+.dragHolderHover { border: 5px dashed #0c0 !important; }
+.btnImgUploadAll { margin-top: 30px;}
+
+#loading
+{
+    display:none;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(255,255,255,0.8);
+    z-index:1000;
+}
+  
+#loadingcont
+{
+    display:table;
+    position:fixed;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+}
+  
+#loadingspinr
+{
+    display: table-cell;
+    vertical-align: middle;
+    width: 100%;
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: bold;
+    padding-top: 80px;
+}

@@ -1,77 +1,98 @@
 ﻿@model perseptus.PresentationEntity.ImagesListPE
-@{
-    ViewBag.Title = "Home Page";
-}
-
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-
-<img src="/Content/loading.gif">
-hello<br />
-@Model.Images.Count()
-<br />
-@foreach (var image in Model.Images)
-{
-    @image<br />
-    <img src='@Url.Action("GetImage", "Home", new {id = 1})'><br />
-}
-
-<div id="loading">
-    <div id="loadingcont">
-        <p id="loadingspinr">
-            <span id="imageProcessing">Обработка изображения ...</span>
-            <span id="imageLoading">Загрузка изображения ...</span>
-            <br />
-            <img src="~/Content/loading.gif">
-        </p>
-    </div>
-</div>
 
 
-<fieldset class="formPhotoUpload formPhotoUpload1">
-    <table>
-        <tr>
-            <td>
-                <div id="selector1" class="fileSelector">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class='page-header'>
+                <h2>Все изображения.</h2>
+            </div>
+            <form class='form-horizontal' role='form' action="/Search/Find" method='post'>
+                <div class='form-group'>
+                    <label class='col-sm-2 control-label'>Путь к файлу</label>
+                    <div class='col-sm-10'>
+                        <input type='text' class='form-control' name='FilePath' value='' placeholder='Путь к файлу с изображением'>
+                    </div>
                 </div>
-            </td>
-        </tr>
-    </table>
+                <div class='form-group'>
+                    <div class='col-sm-offset-2 col-sm-10'>
+                        <button type='submit' class='btn btn-success' name='Upload' value=''>Найти</button>
+                    </div>
+                </div>
+            </form>
 
-    <div class="btn-toolbar">
-        <button class="1 btn btn-primary btnImgUpload" data-url="@Url.Action("DoImportJSON", "Home")">Загрузить</button>
-    </div>
+            @**************************************************************************************@
+            <div class="modal" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" type="button" data-dismiss="modal">×</button>
+                            <h3 class="modal-title"></h3>
+                        </div>
+                        <div class="modal-body">
+                            <div id="modalCarousel" class="carousel">
+                                <div class="carousel-inner"></div>
+                                <a class="carousel-control left" href="#modaCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
+                                <a class="carousel-control right" href="#modalCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-</fieldset>
-<fieldset class="photoUploadResult photoUploadResult1" style="display: none;">
-    <p>Фотография успешно загружена!</p>
-</fieldset>
-<hr class="dixy-hr" />
+            <div id="loading">
+                <div id="loadingcont">
+                    <p id="loadingspinr">
+                        <span id="imageProcessing">Обработка изображения ...</span>
+                        <span id="imageLoading">Загрузка изображения ...</span>
+                        <br />
+                        <img src="~/Content/loading.gif">
+                    </p>
+                </div>
+            </div>
 
+            <fieldset class="formPhotoUpload formPhotoUpload1">
+                <table>
+                    <tr>
+                        <td>
+                            <div id="selector1" class="fileSelector">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
 
+                <div class="btn-toolbar">
+                    <button class="1 btn btn-primary btnImgUpload" data-url="@Url.Action("DoImportJSON", "Home")">Загрузить</button>
+                </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            </fieldset>
+            <fieldset class="photoUploadResult photoUploadResult1" style="display: none;">
+                <p>Фотография успешно загружена!</p>
+            </fieldset>
+            @**************************************************************************************@
+        </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            @foreach (var image in Model.Images)
+            {
+                <div class="col-xs-5">
+                    <div class="thumbnail">
+                        <div class="desc">
+                            <p class="desc_content">@image</p>
+                        </div>
+                        <img src="@Url.Action("Index", "Image" , new { id = image})" alt="125x125">
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

@@ -11,6 +11,6 @@ namespace perseptus.PresentationEntity
         {
             Images = new List<String>();
         }
-        public IEnumerable<String> Images { get; set; }
+        public List<String> Images { get; set; }
     }
 }

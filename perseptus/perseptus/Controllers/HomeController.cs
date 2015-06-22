@@ -6,31 +6,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using perseptus.PresentationEntity;
-using perseptus.ViewInterfaces;
 using perseptus.Models;
+using perseptus.Services;
 using Ninject;
 
 namespace perseptus.Controllers
 {
-    public class FileSaver
-    {
-        static public void SaveImage(Stream data)
-        {
-            const string dir = @"C:\data";
-            if (!Directory.Exists(dir))
-                Directory.CreateDirectory(dir);
-
-            var file = File.Create(dir + @"\" + @"res.jpg");
-            data.CopyTo(file);
-            file.Close();
-        }
-    }
-
     public class HomeController : Controller
     {
-        private readonly IImageModel _imagesRepository;
+        private readonly IFileService _imagesRepository;
 
-        public HomeController(IImageModel repo)
+        public HomeController(IFileService repo) 
         {
             _imagesRepository = repo;
         }
@@ -39,19 +25,10 @@ namespace perseptus.Controllers
         {
             var model = new ImagesListPE
             {
-                Images = _imagesRepository.GetAllImages()
+                Images = _imagesRepository.GetFileNames()
             };
 
             return View(model);
-        }
-
-        public ActionResult GetImage(int id)
-        {
-            var model = new ImagesListPE
-            {
-                Images = _imagesRepository.GetAllImages()
-            };
-            return Json(new { isUploaded = 0, message = 0 }, "text/html");
         }
 
         public ActionResult About()
@@ -81,20 +58,21 @@ namespace perseptus.Controllers
         public ActionResult DoImportJSON(List<String> jsonData)
         {
             bool isUploaded = true;
-            string message = "";
+            String message;
             try
             {
-                if (!String.IsNullOrEmpty(jsonData[0]))
+                String name = _imagesRepository.GetFileNames().Count.ToString() + ".jpg";
+
+                if (!String.IsNullOrEmpty(jsonData[0]) &&
+                    _imagesRepository.AddFile(ConvertBase64ToByte(jsonData[0]), name))
                 {
-                    message = "Файл успешно загружен!";
-                    FileSaver.SaveImage(ConvertBase64ToByte(jsonData[0]));
+                    message = "Изображение успешно загружено!";
                 }
                 else
                 {
-                    message = "Файл не указан!";
+                    message = "Ошибка загрузки файла!";
                     isUploaded = false;
                 }
-
             }
             catch (Exception ex)
             {
@@ -104,7 +82,5 @@ namespace perseptus.Controllers
             }
             return Json(new { isUploaded = isUploaded, message = message }, "text/html");
         }
-
-
     }    
 }

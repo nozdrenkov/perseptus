@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using Ninject;
 using perseptus.Models;
-using perseptus.ViewInterfaces;
+using perseptus.Services;
 
 namespace perseptus.Utils
 {
@@ -27,7 +27,7 @@ namespace perseptus.Utils
         }
         private void AddBindings()
         {
-            kernel.Bind<IImageModel>().To<ImagesFileSystemStorage>();
+            kernel.Bind<IFileService>().To<FileSystemFileService>();
         }
     }
 }

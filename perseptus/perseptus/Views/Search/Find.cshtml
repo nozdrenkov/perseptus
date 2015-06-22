@@ -1,0 +1,43 @@
+﻿@model perseptus.PresentationEntity.ComparedImagesListPE
+
+<style>
+    .row {text-align: center}
+    .col-centered {
+        float: none;
+        margin: 0 auto;
+    }
+</style>
+
+@if (!Model.Images.Any())
+{
+    <h2>Результаты поиска</h2>
+    <br>
+    <div class="alert alert-info">
+        <strong>Печалька!</strong> Похожие изображения не найдены! Пожалуйста, попробуйте загрузить другую картинку.
+    </div>
+}
+else
+{
+    <h2>Результаты поиска</h2>
+    <br>
+    <div class="alert alert-success">
+        <strong>Ура!</strong> Найдено несколько похожих изображений!
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                @foreach (var image in Model.Images)
+                {
+                    <div class="col-xs-5">
+                        <div class="thumbnail">
+                            <img src="@Url.Action("Index", "Image" , new { id = image.Key})" alt="125x125">
+                            <div class="desc">
+                                <p class="desc_content"><b>@image.Value%</b> - степень совпадения</p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            </div>
+    </div>
+}
